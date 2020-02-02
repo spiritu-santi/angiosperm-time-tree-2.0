@@ -43,7 +43,6 @@ hist(ages$SG_age_Acal-ages$CG_age_Acal,xlim=c(0,220),xlab="Fuse period (stem to 
 ages[which(ages$SG_age_Acal-ages$CG_age_Acal > 120),]
 ages[which(ages$SG_age_Acal-ages$CG_age_Acal < 10),]
 
-####### STEM/CROWN DISTRIBUTION PLOTS
 full_SG <- c()
 for (i in 1:nrow(resB_fams)){
   cat(i,"\r")
@@ -86,3 +85,21 @@ periods[4,2] <- round((length(which(resB_fams$SG_age_Acal >= 136)) / length(whic
 sink(paste(ruta_write,"3.Numbers_by_period.txt",sep=""))
 periods
 sink()
+
+pdf(paste(ruta_write,"6.ARCs.pdf",sep=""),useDingbats = F)
+par(mfrow = c(1, 1), pty = "s")
+Data<-data.frame(Order=1:dim(resB_fams)[1],z=log(resB_fams$Total_Richness))
+Data<-Data[order(Data$z),]
+k=20
+breaks <- getJenksBreaks(Data$z,k)
+cols_breaks <- (colorRampPalette(c("yellow","gold","tomato2","red4"))(k))
+Data$col <- cols_breaks[k]
+for (i in k:1){Data$col[which(Data$z <= breaks[i])] <- cols_breaks[i]}
+orderedcolors<-Data[order(Data$Order),"col"]
+plot(resB_fams$Fuse,log(resB_fams$Total_Richness),pch=21,cex=log(resB_fams$Total_Richness)*0.5,xlab="Fuse period (My)"
+     ,ylab="Species Richness (log)",bg=orderedcolors)
+abline(lm(log(resB_fams$Total_Richness)~resB_fams$Fuse),lwd=3,lty=3,col="black")
+summ_lm <- summary(lm(log(resB_fams$Total_Richness)~resB_fams$Fuse))
+legend("bottomright",inset=0.03,legend=paste("b = ",round(summ_lm$coefficients[2,1],2),";","F = ",round(summ_lm$fstatistic[1],2),";",
+                                             "p-val = ",round(summ_lm$coefficients[2,4],2),";","R2* = ",round(summ_lm$adj.r.squared,3),sep=""))
+dev.off()
