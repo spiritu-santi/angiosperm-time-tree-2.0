@@ -1,5 +1,10 @@
+# The code reads the presence absence matrix (PAM) and matches family names between the PAM and the age file generated in previous steps. 
+# Then it estimates and plots species (and family) richness maps across the globe using the grid resolution used for the PAM.
+# Continues with R objects generated in previous steps.
+# Uses additional files
+
 load("~/prPAM_FAM_grid.r") ### file in data folder
-prPAM_g
+
 cat("Maximum number of species per grid-cell:",max(rowSums(prPAM_g[,-c(1:2)])),"species","\n")
 which(rowSums(prPAM_g[,-c(1:2)]) == 0) -> iden_inf
 prPAM_g2 <- prPAM_g[-iden_inf,]
