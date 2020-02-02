@@ -1,5 +1,12 @@
+# Processes the family age file and a family species richness file to merge them into one table. 
+# The species richness estimates per family and subfamily were obtained from the Angiosperm Phylogeny Website. 
+# The code plots mean family ages against species richness.
+# Continues with R objects generated in previous steps.
+# Uses additional files.
+richness_file <- "SPP.RICHNESS.csv" #### File in data folder
+
 resB<-read.table(paste(ruta_write,"2.Ages_complete.csv",sep=""),sep=",",header=T)
-rich<-read.table("SPP.RICHNESS.csv",heade=T,sep=",") #### File in data folder
+rich<-read.table(richness_file,heade=T,sep=",")
 rich_ord<-rich[which(rich$Family==""),]
 resB$Order_richness<-rich_ord[match(resB$Order,rich_ord$Order),"Spp_richness"]
 rich_fams<-rich[which(rich$Subfamily==""),]
