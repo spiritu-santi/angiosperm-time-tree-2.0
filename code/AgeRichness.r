@@ -65,14 +65,6 @@ lines(density(full_SG,bw=5),col="red")
 lines(density(full_CG,bw=5),col="blue")
 dev.off()
 
-
-sink(paste(ruta_write,"3.Age_HRM.txt",sep=""))
-paste("HRM for crown age: ",round(c_HRM_M,2),sep="")
-paste("sd for HRM for crown age: ",round(sd(c_HRM),2),sep="")
-paste("HRM for stem age: ",round(s_HRM_M,2),sep="")
-paste("sd for HRM for stem age: ",round(sd(s_HRM),2),sep="")
-sink()
-
 periods <- data.frame("Stem (number)"=rep(NA,4),"Stem (percent)"=rep(NA,4),"Crown (number)"=rep(NA,4),"Crown (percent)"=rep(NA,4),
         row.names = c("Cenozoic","Cretaceous","Jurassic","Prior to first fossil"))
 periods[1,3] <- length(which(resB_fams$CG_age_Acal < 66))
