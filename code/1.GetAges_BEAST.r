@@ -1,3 +1,5 @@
+# Obtain mean stem and crown ages (and 95-HPD) for orders, families, and subfamilies from the dated phylogeny produced in Beast + treeAnnotator.
+
 tre<-phyloch::read.beast(tree)
 ##### CORRECT SOME TIP NAMES, ALTHOUGH NOT NECESSARY AT THIS POINT
 tre$tip.label[which(tre$tip.label=="Celastrales_Celastraceae_Euonymus_spp_Celastraceae")]<-"Celastrales_Celastraceae_Euonymus_spp_Celastraceae.sstr"
