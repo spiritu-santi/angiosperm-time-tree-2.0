@@ -1,3 +1,9 @@
+# Estimate spatial null models for mean family age and fuse across a global grid of 2x2 (resolution as in the original estimation of the presence absence matrix). 
+# The estimation of the null models is performed by shuffling entries in the PAM in two ways:
+# - NULL 1 randomly shuffles occurrences within sites (i.e., per-row shuffling), keeping the observed species richness.
+# - NULL 2 randomly shuffles occurrences within families (i.e., per-column shuffling), keeping the observed family prevalence.
+# Continues with R objects generated in previous steps.
+
 load(paste(ruta_write,"WeightedMAFS.RData",sep=""))
 prPAM_gpa[,-c(1:2)] <- decostand(prPAM_gpa[,-c(1:2)],method="pa")
 
