@@ -9,53 +9,56 @@
 ##### through time and space.                                                                    #####
 ######################################################################################################
 ######################################################################################################
-###### PRE-PROCESSING: SETTING UP DATA FILES RETRIEVED FROM GBIF #####
-###### USE BASH TO REDUCE FILE SIZE BY SELECTING COLUMNS
-### bash commands are commented out!
-# awk -F"\t" '{print $4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$17"\t"$18}’ DISTASnew.csv > distas_COR.txt
-# awk -F"\t" '{print $10"\t"$28}' DISTASnew.csv > distas_COR_dates.txt
-# wc -l DISTASnew.csv
-# wc -l distas_COR.txt
-##### PREPARE FILE FOR PYTHON SCRIPT
+# Preprocessing: setting up data files retrieved from GBIF
+# Use bash commands to reduce file size by selecting fewer columns
+# Original GBIF data download for angiosperms available here: doi.org/10.15468/dl.iftsjs
+# New GBIF data download for vascular plants available here: 
+# 'DISTASnew.csv' is the name given to the downloaded file
+spiritusanti$ awk -F"\t" '{print $4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$17"\t"$18}’ DISTASnew.csv > distas_COR.txt
+spiritusanti$ awk -F"\t" '{print $10"\t"$28}' DISTASnew.csv > distas_COR_dates.txt
+spiritusanti$ wc -l DISTASnew.csv
+spiritusanti$ wc -l distas_COR.txt
+
+# Prepare file in R to run python script of Edwards et al. (2018) (available here: https://www.nature.com/articles/nature14393?draft=collection) 
+# R commands
 py <- fread("distas_COR.txt");dim(py);colnames(py)
-py <- cbind(py[,7:9],c(1:dim(py)[1])) #### ADD A NUMERIC ID FOR REFEENCE TO THE ORIGINAL DATA
-py[which(py$species!=""),]->py
-dim(py)
+py <- cbind(py[,7:9],c(1:dim(py)[1]))
+py[which(py$species!=""),]->py; dim(py)
 write.table(py,"DISTAS_python.csv",col.names = F,row.names = F,quote = F,sep=",")
-###### FIRST STEP: PERFORM CLEANING USING PYTHON SCRIPT OF Edwards et al. #######
-### the python command is commented out!
-# python FINAL_DISTAS/cleanGbifCoords.1.0.py DISTAS_python.csv FINAL_DISTAS/allHerbaria_ADM1_badCoords.txt DISTAS_good.csv DISTAS_bad.csv
 
-###### SECOND STEP: ELIMANTE UNIDENTIFIED RECORDS ########
-setwd("~/Documents/Termohalina/DATOS/")  
-a<-fread("TRAQUEOS_good.csv"); dim(a) ####### LIST OF GOOD OCURRENCES (ID, LAT, LON, EXTRA)
-bad<-fread("TRAQUEOS_bad.csv"); dim(bad) ####### LIST OF GOOD OCURRENCES (ID, LAT, LON, EXTRA)
-aa<-fread("traqueos_COR.txt"); dim(aa) ###### ORIGINAL DATA (COMPLETE COLUMNS)
-unique(aa$class)
-  iden<-as.vector(a$V4); b <- aa[iden,] ##### EXTRA COLUMN HAS THE ROWNAME FROM THE ORIGINAL
-  dim(b); dim(aa) ##### CHECK IF LENGTH IS OK!
-  ##### CHECK IF BOTH TABLES ARE IN THE SAME ORDER
-  which(is.na(match(a$V1,b$species)))
-  ###### NOT ALL COORDINATES ARE THE SAME DUE TO ROUNDING PROBLEMS
-  ###### BUT IF UNORDERED, THE NO-MATCH SHOULD NOT BE THE SAME IN LAT AND LONG
-  aa<-b; aa$species<-sub(" ","_",aa$species)
+# First Step: clean the database using the python script of Edwards et al.
+spiritusanti$ python cleanGbifCoords.1.0.py DISTAS_python.csv allHerbaria_ADM1_badCoords.txt DISTAS_good.csv DISTAS_bad.csv
 
-###### THIRD STEP: NAME FILTERING AND HOMOGENEIZATION ########
-list_namesA<-fread("FAMILIAS/TPL_all_genera.csv")
-list_names<-list_namesA;dim(list_names) #### LIST OF ALL NAMES FOR ANGIOSPERMS AND FERNS
-names(list_names)[11]<-"Taxonomic_status_TPL"
-list_names$Complete_NAME<-paste(list_names$Genus,list_names$Species,sep="_")
-list_names$New_NAME_ACCEPTED<-list_names$Complete_NAME[match(list_names$`Accepted ID`,list_names$ID,nomatch = NA)]
+# Second step: eliminate unidentified records (species level)
+a <- fread("DISTAS_good.csv")
+bad <- fread("DISTAS_bad.csv")
+aa <- fread("distas_COR.txt")
+iden<-as.vector(a$V4); b <- aa[iden,]
+dim(b); dim(aa)
+aa<-b; aa$species<-sub(" ","_",aa$species)
+
+# Third step: name filtering and homogeneization
+list_namesA <- fread("TPL_all_genera.csv") # file in data folder
+list_names <- list_namesA;dim(list_names)
+names(list_names)[11] <- "Taxonomic_status_TPL"
+list_names$Complete_NAME <- paste(list_names$Genus,list_names$Species,sep="_")
+list_names$New_NAME_ACCEPTED <- list_names$Complete_NAME[match(list_names$`Accepted ID`,list_names$ID,nomatch = NA)]
 list_names[is.na(list_names$New_NAME_ACCEPTED)]$New_NAME_ACCEPTED<-list_names[is.na(list_names$New_NAME_ACCEPTED)]$Complete_NAME
 match(aa$species,list_names$Complete_NAME)->iden
 aa$species_ACCEPTED<-list_names$New_NAME_ACCEPTED[iden]
-fams<-read.table("APW_synonyms.txt",sep=",") ###### LIST OF FAMILY NAMES
+fams<-read.table("APW_synonyms.txt",sep=",") # file in data folder
 colnames(fams)<-c("Name","Synonym","Order")
 fams$ACCEPTED<-rep(NA,dim(fams)[1])
 for(i in 1:dim(fams)[1]) {if((fams$Synonym[i]=="")==TRUE){fams$ACCEPTED[i]<-as.character(fams$Name[i])}
                           else (fams$ACCEPTED[i]<-as.character(fams$Synonym[i]))}
 match(aa$family,fams$Name)->iden
 aa$family_ACCEPTED<-fams$ACCEPTED[iden]
+
+
+
+
+
+
 ###### FOURTH STEP: MINOR EDITS AND SAVE ########
 length(unique(aa$family_ACCEPTED))
 sort(unique(aa$family_ACCEPTED))
