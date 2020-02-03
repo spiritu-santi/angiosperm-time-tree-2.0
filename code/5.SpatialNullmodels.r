@@ -4,9 +4,6 @@
 # - NULL 2 randomly shuffles occurrences within families (i.e., per-column shuffling), keeping the observed family prevalence.
 # Continues with R objects generated in previous steps.
 
-load(paste(ruta_write,"WeightedMAFS.RData",sep=""))
-prPAM_gpa[,-c(1:2)] <- decostand(prPAM_gpa[,-c(1:2)],method="pa")
-
 MDT_crown_NULL2 <- matrix(nrow = dim(prPAM_g2)[1], ncol = 1002)
 for (j in 3:ncol(MDT_crown_NULL2)){ 
   cat("SIMULATION NULL2",j-2,"\r")
