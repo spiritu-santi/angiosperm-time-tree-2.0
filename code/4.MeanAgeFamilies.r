@@ -1,3 +1,8 @@
+# Estimates mean age of families and mean phylogenetic fuse of families across a global grid of 2x2 (resolution as in the original estimation of the presence absence matrix). 
+# The estimation for every  grid-cell j is done by using the corresponding species richness (i.e., species present in j) for every family i present in j.
+# (this procedure can also be performed using presence only (i.e., species richness = 1) of families in j, by transforming the PAM into a binary matrix).
+# Continues with R objects generated in previous steps (saves and loads objects for plotting).
+                                                      
 which(rowSums(prPAM_g2[,-c(1:2)]) > 5) -> iden; prPAM_g2 <- prPAM_g2[iden,]
 prPAM_gt <- prPAM_g2
 for (i in 3:438){ 
