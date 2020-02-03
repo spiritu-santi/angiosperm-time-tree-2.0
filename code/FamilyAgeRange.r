@@ -2,8 +2,47 @@
 # The code also plots the mean family crown ages obtained from the Angiosperm Time Tree 2.0 (ATT 2.0).
 # Must run scripts 1, 2 and 3.
 # Uses additional files.
-
 APWeb <- "Parsed_APWeb.csv" # file in data folder
+
+####### The following chunk of code generates the "Parsed_APWeb.csv" file.
+rawAPWeb <- "CGages_APWeb.csv" # file in data folder
+ages<-read.table(rawAPWeb,sep=",",header=T)
+colnames(ages)
+table(ages$FAMILY)
+un_node <- as.vector(unique(ages$NODE))
+un_node <- un_node[match(rownames(resB_fams),un_node)]
+un_clades <- ages[match(un_node,ages$NODE),"FAMILY"]
+edades <- c();maximos<-c();minimos <- c()
+for (i in 1: length(un_node)){ 
+  cat(i,"\n")
+  if(is.na(un_node[i])){ edades <- c(edades, NA);maximos <- c(maximos,NA);minimos <- c(minimos,NA);next}
+  if(dim(ages[ages$NODE==un_node[i],])[1]==1){ 
+    edades <- c(edades,mean(as.numeric(ages[ages$NODE==un_node[i],9:11]),na.rm = T))
+    maximos <- c(maximos,max(as.numeric(ages[ages$NODE==un_node[i],9:11]),na.rm = T))
+    minimos <- c(minimos,min(as.numeric(ages[ages$NODE==un_node[i],9:11]),na.rm = T))
+    next}
+  edades <- c(edades, mean(ages[ages$NODE==un_node[i],"mean"],na.rm=T))
+  maximos <- c(maximos, max(ages[ages$NODE==un_node[i],"mean"],na.rm=T))
+  minimos <- c(minimos, min(ages[ages$NODE==un_node[i],"mean"],na.rm=T))
+}
+data <- data.frame(edades=edades,max=maximos,min=minimos,family_APWeb=un_node,clade=un_clades,family_beast=rownames(resB_fams),beast_age=resB_fams$CG_age_Acal)
+data$grupos <- rep(NA,dim(data)[1])
+head(data)
+data[which(data$clade==1),"grupos"] <- "ANA"
+data[which(data$clade==2),"grupos"] <- "Magnoliids"
+data[which(data$clade==3),"grupos"] <- "Chlor + Cera"
+data[which(data$clade==4),"grupos"] <- "Monocots"
+data[which(data$clade==5),"grupos"] <- "Monocots"
+data[which(data$clade==6),"grupos"] <- "Eudicots"
+data[which(data$clade==7),"grupos"] <- "Eudicots"
+data[which(data$clade==8),"grupos"] <- "Eudicots"
+data[which(data$clade==9),"grupos"] <- "Eudicots"
+data[which(data$clade==10),"grupos"] <- "Eudicots"
+data[which(data$clade==11),"grupos"] <- "Eudicots"
+data[which(data$clade==12),"grupos"] <- "Eudicots"
+data[which(is.na(data$clade)),"grupos"] <- "no data"
+write.table(data,file="Parsed_APWeb.csv",sep=",",col.names=T, row.names=T)
+##########
 
 data<- read.table(APWeb,sep=",",header=T)
 data <- data[order(data$grupos,data$clade),]
