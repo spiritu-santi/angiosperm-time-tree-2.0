@@ -21,7 +21,7 @@
 #############################################################################################
 
 # 163,114,117,169,177,147,12,183,182,360,336,195,19,251,345,244,346,361,2,215,286,285,288,312,339,124
-input= "Data1_RAxML_v.8.0.tre" # available as Supplementary Data in Ramírez-Barahona et al. (2020)
+input= "Data1_RAxMLTree.tre" # available as Supplementary Data in Ramírez-Barahona et al. (2020)
 species.table = "Tree_TIPS.csv" # file in data folder
 PROTEUS.cal = "PROTEUS_INCLUDED_24-4-18.csv" # available as Supplementary Data in Ramírez-Barahona et al. (2020)
 setwd("~/Documents/")
