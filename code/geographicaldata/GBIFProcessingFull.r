@@ -38,7 +38,7 @@ dim(b); dim(aa)
 aa<-b; aa$species<-sub(" ","_",aa$species)
 
 # Third step: name filtering and homogeneization
-list_namesA <- fread("TPL_all_genera.csv") # file in data folder
+list_namesA <- fread("TPL_all_genera.csv") # list of genera in The Plant List
 list_names <- list_namesA;dim(list_names)
 names(list_names)[11] <- "Taxonomic_status_TPL"
 list_names$Complete_NAME <- paste(list_names$Genus,list_names$Species,sep="_")
@@ -46,7 +46,7 @@ list_names$New_NAME_ACCEPTED <- list_names$Complete_NAME[match(list_names$`Accep
 list_names[is.na(list_names$New_NAME_ACCEPTED)]$New_NAME_ACCEPTED<-list_names[is.na(list_names$New_NAME_ACCEPTED)]$Complete_NAME
 match(aa$species,list_names$Complete_NAME)->iden
 aa$species_ACCEPTED<-list_names$New_NAME_ACCEPTED[iden]
-fams<-read.table("APW_synonyms.txt",sep=",") # file in data folder
+fams<-read.table("APW_synonyms.txt",sep=",") # list of family names in the Angiosperm Phylogeny Website
 colnames(fams)<-c("Name","Synonym","Order")
 fams$ACCEPTED<-rep(NA,dim(fams)[1])
 for(i in 1:dim(fams)[1]) {if((fams$Synonym[i]=="")==TRUE){fams$ACCEPTED[i]<-as.character(fams$Name[i])}
