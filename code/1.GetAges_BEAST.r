@@ -3,7 +3,7 @@
 # The MCC trees are stored as part of the Supplementary Data of Ramírez-Barahona et al. (2020)
 # Uses additional files
 
-tree <- "SB_MCC.v_1.tre" # file in data folder (the six MCCs trees are available)
+tree <- "SB_MCC.v_1.tre" # file in data folder (the six MCCs trees are available as a ZIP file)
 tre<-phyloch::read.beast(tree)
 ##### CORRECT SOME TIP NAMES, ALTHOUGH NOT NECESSARY AT THIS POINT
 tre$tip.label[which(tre$tip.label=="Celastrales_Celastraceae_Euonymus_spp_Celastraceae")]<-"Celastrales_Celastraceae_Euonymus_spp_Celastraceae.sstr"
