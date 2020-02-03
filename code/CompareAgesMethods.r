@@ -1,8 +1,14 @@
-#
-#
-#
-#
-# Uses additional files
+# Compares stem and crown ages for dating analyses using two methods: 
+# - penalized likelihood as implemented in treePL
+# - bayesian relaxed clock models as implementes in BEAST
+# - SA = Constrained Calibration (CC)
+# - SB = Relaxed Calibration (RC)
+# - SD = Unconstrained Calibration (UC)
+# - phylo = conservative set
+# - complete = complete set.
+# Uses additional files.
+# NOTE TO SELF: this can easily be automated! Currently needs to be edited with the names for each of the three dating analyses with different calibration strategies.
+# NOTE TO SELF: probably also need to homogenize strategies' codes.
 
 rich<-read.table("SPP.RICHNESS.csv",heade=T,sep=",") # file in data folder
 tree = "~/Documents/NATURE/RESULTADOS_V4/TREES/SDstrict_treePL_dated.tre" # file in data folder (the six trees available in a ZIP file).
