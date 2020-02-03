@@ -1,4 +1,6 @@
-# Obtain mean stem and crown ages (and 95-HPD) for orders, families, and subfamilies from the dated phylogeny produced in Beast + treeAnnotator.
+# Obtain mean stem and crown ages (and 95-HPD) for orders, families, and subfamilies. 
+# Dated phylogeny produced in Beast + treeAnnotator.
+# The MCC trees are stored as part of the Supplementary Data of Ramírez-Barahona et al. (2020)
 
 tre<-phyloch::read.beast(tree)
 ##### CORRECT SOME TIP NAMES, ALTHOUGH NOT NECESSARY AT THIS POINT
