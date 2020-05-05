@@ -13,4 +13,6 @@ Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographicall
 - Data9_TopologicalConstraints.tre: topological constraints (NEWICK format) used in the estimation of angiosperm phylogenetic relationships.
 - Data10_BEASTTrees.zip (zipped folder): angiosperm dated phylogenies estimated under the six calibration schemes in BEAST 2.5.1.
 
-# Extra files with raw data
+# Extra files with raw data (Extra_data/)
+
+
