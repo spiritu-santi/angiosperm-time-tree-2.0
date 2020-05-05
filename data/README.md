@@ -1,6 +1,6 @@
 # Supplementary Data
 
-Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographically heterogeneous diversification of flowering plant families. Nature Ecology and Evolution
+Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographically heterogeneous diversification of flowering plant families (under review)
 
 - Data1_ RAxMLTree.tre: maximum likelihood angiosperm phylogeny (NEWICK format) estimated with RAxML.
 - Data2_PROTEUS (folder): detail information on the fossils used for calibration provided as a PDF file (Data2a_CalibrationList.pdf) and an Excel worksheet (Data2b_CalibrationList.xlxs).
