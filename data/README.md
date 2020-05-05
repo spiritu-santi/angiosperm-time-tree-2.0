@@ -14,5 +14,11 @@ Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographicall
 - Data10_BEASTTrees.zip (zipped folder): angiosperm dated phylogenies estimated under the six calibration schemes in BEAST 2.5.1.
 
 # Extra files with raw data (Extra_data/)
-
+- prPAM_FAM_grid.r (R data): presence absence matrix for families across the world (2 x 2º resolution).
+- super_biomeRaster.Rdata (R data): global raster map for super biomes.
+- treePL_TREES.zip (zipped folder): angiosperm dated phylogenies estimated under the six calibration schemes in treePL.
+- SPP.RICHNESS.csv:  table of species richness estimates for families, subfamilies and orders of angiosperms (from the Angiosperm Phylogeny Website, last accessed March 2019).
+- Tree_TIPS.csv: list of names and classification of tips in the phylogeny.
+- CGages_APWeb.csv: estimated crown ages for angiosperm families (from the Angiosperm Phylogeny Website, last accessed March 2019).
+- APW_synonyms.txt: list of families names and synonyms (from the Angiosperm Phylogeny Website, last accessed March 2019).
 
