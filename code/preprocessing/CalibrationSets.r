@@ -19,7 +19,6 @@
 ########     two tip labels (MRCA) for each calibrated clade. This file only     ############
 ########     needs the final running options implemented in treepl.              ############
 #############################################################################################
-
 # 163,114,117,169,177,147,12,183,182,360,336,195,19,251,345,244,346,361,2,215,286,285,288,312,339,124
 input= "Data1_RAxMLTree.tre" # available as Supplementary Data in Ramírez-Barahona et al. (2020)
 species.table = "Tree_TIPS.csv" # file in data folder
