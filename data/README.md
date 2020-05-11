@@ -1,6 +1,6 @@
 # Supplementary Data
 
-Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographically heterogeneous diversification of flowering plant families (under review)
+Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographically heterogeneous diversification of flowering plant families.
 
 - Data1_ RAxMLTree.tre: maximum likelihood angiosperm phylogeny (NEWICK format) estimated with RAxML.
 - Data2_PROTEUS (folder): detail information on the fossils used for calibration provided as a PDF file (Data2a_CalibrationList.pdf) and an Excel worksheet (Data2b_CalibrationList.xlxs).
@@ -13,7 +13,7 @@ Ramírez-Barahona S, Sauquet H, Magallón S. 2020. The delayed and geographicall
 - Data9_TopologicalConstraints.tre: topological constraints (NEWICK format) used in the estimation of angiosperm phylogenetic relationships.
 - Data10_BEASTTrees.zip (zipped folder): angiosperm dated phylogenies estimated under the six calibration schemes in BEAST 2.5.1.
 
-# Extra files with raw data (Extra_data/)
+# Extra files with raw data
 - prPAM_FAM_grid.r (R data): presence absence matrix for families across the world (2 x 2º resolution).
 - super_biomeRaster.Rdata (R data): global raster map for super biomes.
 - treePL_TREES.zip (zipped folder): angiosperm dated phylogenies estimated under the six calibration schemes in treePL.
