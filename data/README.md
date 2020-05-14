@@ -1,7 +1,7 @@
 # Supplementary Data
 - Data1_ RAxMLTree.tre: maximum likelihood angiosperm phylogeny (NEWICK format) estimated with RAxML.
 - Data2*: detail information on the fossils used for calibration provided as a PDF file (Data2a_CalibrationList.pdf) and an Excel worksheet (Data2b_CalibrationList.xlxs).
-  > Refer to XXXXXXX for updates.
+  > Refer to https://github.com/eflowerproject/angiocal/releases for updates.
 - Data3_CalibrationMap.pdf: angiosperm phylogenetic tree with nodes annotated with the fossils used for calibration (fossil code numbers as in Data 2).
 - Data4_ Ages.xlsx: age for orders, families and subfamilies of angiosperms obtained from the angiosperm dated phylogenies in Data 7.
 - Data5_ AncestralBiomeResults.xlsx: results of ancestral biome reconstructions for angiosperms using the angiosperm dated phylogenies in Data 10.
